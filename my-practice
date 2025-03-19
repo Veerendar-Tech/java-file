@@ -1,0 +1,128 @@
+/*
+ * Java Zero to Hero Code Experience
+ * This file covers fundamental to advanced concepts in Java.
+ */
+
+// Basic Hello World Program
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+// Object-Oriented Programming: Class and Object
+class Person {
+    String name;
+    int age;
+
+    // Constructor
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method
+    void introduce() {
+        System.out.println("My name is " + name + " and I am " + age + " years old.");
+    }
+}
+
+// Inheritance Example
+class Employee extends Person {
+    String jobTitle;
+
+    Employee(String name, int age, String jobTitle) {
+        super(name, age);
+        this.jobTitle = jobTitle;
+    }
+
+    @Override
+    void introduce() {
+        System.out.println("My name is " + name + ", I am " + age + " years old and I work as a " + jobTitle + ".");
+    }
+}
+
+// Polymorphism Example
+class Animal {
+    void makeSound() {
+        System.out.println("Some generic animal sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Bark");
+    }
+}
+
+// Exception Handling Example
+class ExceptionHandlingDemo {
+    static void checkAge(int age) throws Exception {
+        if (age < 18) {
+            throw new Exception("Age must be 18 or above.");
+        } else {
+            System.out.println("Valid age!");
+        }
+    }
+}
+
+// Multithreading Example
+class MyThread extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " - Count: " + i);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+// Java Collections Example
+import java.util.*;
+
+class CollectionsDemo {
+    public static void main(String[] args) {
+        List<String> names = new ArrayList<>();
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+}
+
+// Lambda Expressions and Streams Example
+class LambdaDemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        numbers.stream().map(n -> n * n).forEach(System.out::println);
+    }
+}
+
+// Database Connection (JDBC) Example
+import java.sql.*;
+
+class JDBCDemo {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/mydatabase";
+        String user = "root";
+        String password = "password";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM users")) {
+
+            while (rs.next()) {
+                System.out.println("User: " + rs.getString("username"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
